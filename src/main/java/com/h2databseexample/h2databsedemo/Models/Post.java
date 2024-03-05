@@ -1,10 +1,7 @@
 package com.h2databseexample.h2databsedemo.Models;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,8 +14,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Post {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE )
+    private Long  id;
 
     private String title;
 
@@ -26,4 +23,8 @@ public class Post {
     private String body;
 
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name="account_id",referencedColumnName = "id",nullable = true)
+    private Account account;
 }
